@@ -1,38 +1,18 @@
-<html>
+---
+layout: default
+section: blog
+---
 
-<head>
-	<title>kbrubaker59</title>
-<style>
-* {
-font-family: Helvetica, sans-serif;
-font-weight:normal;
-}
-h1, h2, p {
-text-align: center;
-}
-p {
-color:orange;
-border:solid 1px green;
-background-color: #dddddd;
-padding: 10px 0;
-}
-p:nth-of-type(even) {
-color:green;
-}
-</style>
+<div class='listing col6 pad4h margin3'>
+  {% for item in site.categories.blog limit:1000 %}
+    {% capture date %}{{ item.date | date: '%B %Y' }}{% endcapture %}
+    {% capture ndate %}{{ item.next.date | date: '%B %Y' }}{% endcapture %}
 
-</head>
+    {% if date != ndate %}
+      <h4 class='month'>{{item.date | date: '%B %Y'}}</h4>
+    {% endif %}
+    <a class='item' href='{{site.baseurl}}{{item.url}}'>{{item.title}} <span class='date'>&#126; {{item.date | date:"%b %d"}}</span></a>
+  {% endfor %}
+</div>
 
-<body>
-
-	<h1>Perfectly formatted html</h1>
-	<h2>So perfectly formatted</h2>
-	<p>Paragraph paragraph paragraph</p>
-	<p>Paragraph paragraph paragraph</p>
-	<p>Paragraph paragraph paragraph</p>
-	<p>Paragraph paragraph paragraph</p>
-	<p>Paragraph paragraph paragraph</p>
-
-</body>
-
-</html>
+{% include rss-link.html %}
